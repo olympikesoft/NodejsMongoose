@@ -9,6 +9,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 
 var bodyParser = require('body-parser');
+require('./app_server/models/db');
 
 var mongoose = require('mongoose');
 
