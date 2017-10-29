@@ -4,26 +4,25 @@ var path = require('path');
 
 var favicon = require('serve-favicon');
 
+
 var logger = require('morgan');
+
+//var nodemon = require('nodemon');
 
 var cookieParser = require('cookie-parser');
 
 var bodyParser = require('body-parser');
-require('./app_server/models/db');
-
-var mongoose = require('mongoose');
 
 
+var db = require('./app_api/models/db.js');
+
+var port = 3000;
 
 var routes = require('./app_server/routes/index.js');
 
-var users = require('./app_server/routes/users.js');
+var routesLocationApi = require('./app_api/controllers/locations.js');
 
-/*Define Schema*/
-
-var locations = require('./app_server/models/locations')
-
-var port = 3000;
+var routesUserApi = require('./app_api/controllers/users.js');
 
 var app = express();
 
@@ -55,7 +54,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
-app.use('/users', users);
+app.use('/api', routesLocationApi);
+
+app.use('/user', routesUserApi);
 
 
 
@@ -121,10 +122,9 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(port, function(){
-    console.log("RUNN in 3000!");
+app.listen(port, function(req, res){
+    console.log("APP IN :" + port);
 });
-
 
 
 module.exports = app;

@@ -15,6 +15,8 @@ router.get('/', ctrlMain.index);
 
 router.get('/about', ctrlMain.about);
 
+//API CALLS//
+
 
 
 module.exports = router;

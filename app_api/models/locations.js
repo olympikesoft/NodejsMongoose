@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 
+
 var openingTimeSchema = new mongoose.Schema({
     days: {type:String, required: true},
     opening: String, 
@@ -26,4 +27,6 @@ var locationSchema = new mongoose.Schema({
 });
 
 
-mongoose.model('Location', locationSchema);
+
+module.exports = mongoose.model('locations', locationSchema);
+

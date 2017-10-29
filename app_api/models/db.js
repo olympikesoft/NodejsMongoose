@@ -1,19 +1,26 @@
 var mongoose = require('mongoose');
 
+var Loc = require('./locations.js');
+
+
+
+
 var gracefulShutdown;
 
-var dbURI = 'mongodb://localhost/Loc8r';
+//
+var dbURI = 'mongodb://localhost/trabbel';
 
 if (process.env.NODE_ENV === 'production') {
 
-    dbURI = process.env.MONGOLAB_URI;
-    console.log('Mongoose connected to server:' + dbURI);
+    dbURI = process.env.MONGOLAB_URI || 'mongodb://andrepasr:antonio10@ds133465.mlab.com:33465/locations';
+    mongoose.connect(dbURI);
+
+    console.log(dbURI);
+    
 
 }
 
 
-
-mongoose.connect(dbURI);
 
 
 
@@ -38,6 +45,17 @@ mongoose.connection.on('disconnected', function(err) {
 });
 
 
+
+Loc.count({}, function(err, count){
+    if(count > 0){
+    console.log( "Number of docs: ", count );
+    }else{
+        console.log("0");
+    }
+    if(err){
+        console.log(err);
+    }
+});
 
 // CAPTURE APP TERMINATION / RESTART EVENTS
 
