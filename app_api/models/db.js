@@ -2,25 +2,16 @@ var mongoose = require('mongoose');
 
 var Loc = require('./locations.js');
 
-
-
-
 var gracefulShutdown;
 
 //
 var dbURI = 'mongodb://localhost/trabbel';
 
 if (process.env.NODE_ENV === 'production') {
-
     dbURI = process.env.MONGOLAB_URI || 'mongodb://andrepasr:antonio10@ds133465.mlab.com:33465/locations';
-    mongoose.connect(dbURI);
-
-    console.log(dbURI);
-    
-
 }
-
-
+mongoose.connect(dbURI);
+console.log(dbURI);
 
 
 
@@ -112,5 +103,3 @@ process.on('SIGTERM', function() {
 
 
 // BRING IN YOUR SCHEMAS & MODELS
-
-require('./locations');
